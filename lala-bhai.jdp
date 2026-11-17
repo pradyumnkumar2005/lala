@@ -20,17 +20,21 @@ pipeline {
         }
 
         stage('TEST') {
-            steps {
-                withSonarQubeEnv(installationName: 'lala', credentialsId: 'lala-test') {
-                 dir('backend') {
-                   sh '''mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \\
-  -Dsonar.projectKey=lala-test \\
-  -Dsonar.projectName=\'lala-test\' \\'''
-                 }
-                } 
-                echo 'TEST SUCCESS'
+            stage('TEST') {
+    steps {
+        withSonarQubeEnv(
+            installationName: 'lala',
+            credentialsId: 'lala-test'
+        ) {
+            dir('backend') {
+                sh '''
+                    mvn org.sonarsource.scanner.maven:sonar-maven-plugin:5.9.0.7382:sonar -Dsonar.projectKey=lala-test -Dsonar.projectName=lala-test
+                '''
             }
         }
+        echo 'TEST SUCCESS'
+    }
+}
 
         stage('DEPLOY') {
             steps { 
