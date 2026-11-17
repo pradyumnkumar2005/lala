@@ -21,14 +21,13 @@ pipeline {
 
         stage('TEST') {
             steps {
+                withSonarQubeEnv(installationName: 'lala-test', credentialsId: 'lala-test') {
                  dir('backend') {
                    sh sh '''mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \\
   -Dsonar.projectKey=lala-test \\
-  -Dsonar.projectName=\'lala-test\' \\
-  -Dsonar.host.url=http://13.234.230.244:9000 \\
-  -Dsonar.token=sqp_7e22754a2cbd373c2327e84434cd90d1ca7958d3'''
+  -Dsonar.projectName=\'lala-test\' \\'''
                  }
-
+                } 
                 echo 'TEST SUCCESS'
             }
         }
