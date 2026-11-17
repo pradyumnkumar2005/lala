@@ -21,9 +21,9 @@ pipeline {
 
         stage('TEST') {
             steps {
-                withSonarQubeEnv(credentialsId: 'lala-test') {
+                withSonarQubeEnv(installationName: 'lala-test', credentialsId: 'lala-test') {
                  dir('backend') {
-                   sh sh '''mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \\
+                   sh '''mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \\
   -Dsonar.projectKey=lala-test \\
   -Dsonar.projectName=\'lala-test\' \\'''
                  }
