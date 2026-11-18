@@ -6,7 +6,7 @@ pipeline {
         stage('PULL') {
             steps {
                 git 'https://github.com/pradyumnkumar2005/lala.git'
-                echo 'PULL SUCCESS'
+                echo 'PULL  SUCCESS'
             }
         }
 
